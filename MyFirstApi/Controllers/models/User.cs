@@ -7,19 +7,9 @@
 
         public string Surname { get; set; } = string.Empty;
 
-        public string Id { get; set; } = string.Empty; //Guid.NewGuid().ToString();
+        public string Id { get; set; } = string.Empty;
 
         public int Age { get; set; } = 0;
-
-
-        /*public User(string Name, string Surname, int Age)
-        {
-
-            this.Name = Name;
-            this.Surname = Surname;
-            this.Age = Age;
-
-        }*/
 
 
         public Dictionary<string, string> toMap()

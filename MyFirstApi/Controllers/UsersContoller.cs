@@ -38,7 +38,7 @@ namespace MyFirstApi.Controllers
 
 
         [HttpPost]
-        public async Task<ActionResult<IEnumerable<User>>> Add(User user)
+        public async Task<ActionResult<IEnumerable<User>>> Add([FromBody] User user)
         {
 
             user.Id = Guid.NewGuid().ToString();
@@ -56,8 +56,8 @@ namespace MyFirstApi.Controllers
 
         }
 
-        [HttpPut]
-        public async Task<ActionResult<IEnumerable<User>>> UpdateUser(User user)
+        [HttpPut("{id}")]
+        public async Task<ActionResult<IEnumerable<User>>> UpdateUser(string id,[FromBody] UserBase user)
         {
 
             if (user == default || !(user!.isValid()))
@@ -65,7 +65,7 @@ namespace MyFirstApi.Controllers
                 return BadRequest("Utente Non Valido");
             }
 
-            var userFound = await _context.Users.FindAsync(user.Id);
+            var userFound = await _context.Users.FindAsync(id);
 
             if (userFound == null)
             {

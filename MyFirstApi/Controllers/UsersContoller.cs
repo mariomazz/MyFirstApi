@@ -27,7 +27,7 @@ namespace MyFirstApi.Controllers
         public async Task<ActionResult<User>> GetById(string id)
         {
             var user = await _context.Users.FindAsync(id);
-
+            
             if (user == null)
             {
                 return BadRequest("Utente Non Trovato");

@@ -27,7 +27,7 @@ namespace MyFirstApi.Controllers
         public async Task<ActionResult<User>> GetById(string id)
         {
             var user = await _context.Users.FindAsync(id);
-            
+
             if (user == null)
             {
                 return BadRequest("Utente Non Trovato");
@@ -38,15 +38,15 @@ namespace MyFirstApi.Controllers
 
 
         [HttpPost]
-        public async Task<ActionResult<IEnumerable<User>>> Add([FromBody] User user)
+        public async Task<ActionResult<IEnumerable<UserBase>>> Add([FromBody] UserBase data)
         {
 
-            user.Id = Guid.NewGuid().ToString();
-
-            if (user == default || !(user!.isValid()))
+            if (data == default || !(data!.isValid()))
             {
                 return BadRequest("Utente Non Valido");
             }
+
+            var user = new User { Name = data.Name, Age = data.Age, Surname = data.Surname };
 
             await _context.Users.AddAsync(user);
 
@@ -57,7 +57,7 @@ namespace MyFirstApi.Controllers
         }
 
         [HttpPut("{id}")]
-        public async Task<ActionResult<IEnumerable<User>>> UpdateUser(string id,[FromBody] UserBase user)
+        public async Task<ActionResult<IEnumerable<User>>> UpdateUser(string id, [FromBody] UserBase user)
         {
 
             if (user == default || !(user!.isValid()))

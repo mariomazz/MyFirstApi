@@ -2,7 +2,7 @@
 {
     public class User : UserBase
     {
-        public string Id { get; set; } = string.Empty;
+        public long Id { get; set; }
 
     }
 }
